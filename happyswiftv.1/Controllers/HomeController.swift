@@ -8,7 +8,24 @@
 
 import UIKit
 
-class HomeController: UIViewController {
+class HomeController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    let Konten = ContentSwift().JudulContentSwift
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return Konten.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContentCollectionViewCell", for: indexPath) as! ContentCollectionViewCell
+        
+        cell.LabelJudulKonten.text = "\(Konten[indexPath.row])"
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(Konten[indexPath.row])
+        performSegue(withIdentifier: "SubKonten", sender: indexPath)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,16 +37,5 @@ class HomeController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

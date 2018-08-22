@@ -8,12 +8,30 @@
 
 import UIKit
 
-class SubmenuController: UIViewController {
+class SubmenuController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    @IBOutlet weak var TableKonten: UITableView!
+    @IBOutlet weak var LabelKonten: UILabel!
+    var SubKonten = [1,2,3,4]
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return SubKonten.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SubContentTableViewCell
+        cell.LabelJudulSubKonten.text = "\(SubKonten[indexPath.row])"
+        return cell
+        
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        TableKonten.dataSource = self
+        TableKonten.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
