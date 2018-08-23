@@ -39,9 +39,8 @@ class HomeController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print(sender) 
         var index = sender as! IndexPath
-        var destination = segue.destination as! SubmenuController
+        let destination = segue.destination as! SubmenuController
         switch index.row {
         case 0:
             destination.SubKonten = ContentSwift().BelajarSwift1
