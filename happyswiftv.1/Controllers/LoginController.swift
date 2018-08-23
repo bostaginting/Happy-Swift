@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class LoginController: UIViewController {
 
@@ -15,21 +17,30 @@ class LoginController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
+    @IBOutlet weak var TextFieldEmail: UITextField!
+    @IBOutlet weak var TextFieldPassword: UITextField!
 
-    /*
-    // MARK: - Navigation
+    @IBAction func ButtonMasuk(_ sender: HomeController) {
+        print("TES")
+        if self.TextFieldEmail.text == "" || self.TextFieldPassword.text == "" {
+            let AlertController = UIAlertController (title: "Error", message: "Please Enter Email and Password", preferredStyle: .alert)
+            let DefaultAction = UIAlertAction (title: "OK", style: .cancel, handler: nil)
+            AlertController.addAction(DefaultAction)
+            self.present(AlertController, animated: true, completion: nil)
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        }else{
+            Auth.auth().signIn(withEmail: self.TextFieldEmail.text!, password: self.TextFieldPassword.text!) {(user,error) in
+                if error == nil{
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "HomeController")
+                    self.present(vc!, animated: true, completion: nil)
+                }else{
+                    let AlertController = UIAlertController (title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                    let DefaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    AlertController.addAction(DefaultAction)
+                    self.present(AlertController, animated: true, completion: nil)
+                }
+            }
+        }
     }
-    */
-
 }

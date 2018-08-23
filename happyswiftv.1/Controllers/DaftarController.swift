@@ -24,10 +24,11 @@ class DaftarController: UIViewController {
 //        daftarback.heightAnchor.constraint(equalToConstant: view.bounds.size.height).isActive = true
 //        view.addSubview(daftarback)
     }
-    @IBAction func DaftarButton(_ sender: Any) {
+    @IBAction func DaftarButton(_ sender: LoginController) {
         if EmailRegFIeld.text == ""{
             let alertController = UIAlertController(title: "error", message:"Enter email and password", preferredStyle: .alert)
             let defaultaction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(defaultaction)
             present(alertController, animated: true, completion: nil)
             
         }else{

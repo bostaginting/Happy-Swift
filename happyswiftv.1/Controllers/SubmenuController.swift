@@ -12,7 +12,7 @@ class SubmenuController: UIViewController, UITableViewDataSource, UITableViewDel
     
     @IBOutlet weak var TableKonten: UITableView!
     @IBOutlet weak var LabelKonten: UILabel!
-    var SubKonten = [1,2,3,4]
+    var SubKonten = [String]()
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -22,6 +22,7 @@ class SubmenuController: UIViewController, UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SubContentTableViewCell
         cell.LabelJudulSubKonten.text = "\(SubKonten[indexPath.row])"
+        print(SubKonten[indexPath.row])
         return cell
         
     }
@@ -32,6 +33,8 @@ class SubmenuController: UIViewController, UITableViewDataSource, UITableViewDel
         // Do any additional setup after loading the view.
         TableKonten.dataSource = self
         TableKonten.delegate = self
+        
+        print(#function, SubKonten)
     }
 
     override func didReceiveMemoryWarning() {

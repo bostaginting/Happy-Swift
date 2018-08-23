@@ -37,5 +37,21 @@ class HomeController: UIViewController, UICollectionViewDataSource, UICollection
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print(sender) 
+        var index = sender as! IndexPath
+        var destination = segue.destination as! SubmenuController
+        switch index.row {
+        case 0:
+            destination.SubKonten = ContentSwift().BelajarSwift1
+        case 1:
+            destination.SubKonten = ContentSwift().BelajarSwift2
+        case 2:
+            destination.SubKonten = ContentSwift().BelajarSwift3
+        default:
+            return
+        }
+    }
 
 }
